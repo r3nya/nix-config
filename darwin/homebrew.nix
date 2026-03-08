@@ -1,5 +1,77 @@
 { ... }:
 
+let
+  browsers = [
+    "brave-browser"
+    "firefox"
+  ];
+
+  communicationApps = [
+    "element"
+    "signal"
+    "telegram"
+    "zoom"
+  ];
+
+  developerApps = [
+    "ghostty"
+    "orbstack"
+    "zed"
+  ];
+
+  productivityApps = [
+    "bitwarden"
+    "chatgpt"
+    "claude"
+    "obsidian"
+    "proton-drive"
+    "rectangle"
+    "tailscale"
+  ];
+
+  utilityApps = [
+    "imageoptim"
+    "keka"
+    "transmission"
+  ];
+
+  cliTools = [
+    "btop"
+    "cloc"
+    "fd"
+    "fzf"
+    "gh"
+    "htop"
+    "httpie"
+    "jq"
+    "ripgrep"
+    "tmux"
+    "tree"
+    "wget"
+  ];
+
+  languageTools = [
+    "asdf"
+    "node"
+    "pnpm"
+    "yarn"
+  ];
+
+  shellPlugins = [
+    "zsh-autosuggestions"
+    "zsh-history-substring-search"
+    "zsh-syntax-highlighting"
+  ];
+
+  miscCli = [
+    "kimi-cli"
+  ];
+
+  appStoreApps = {
+    "Dato" = 1472587095;
+    "uBlock Origin" = 1437421616;
+  };
+in
 {
   homebrew = {
     enable = true;
@@ -10,36 +82,19 @@
       upgrade = false;
     };
 
-    casks = [
-      "ghostty"
-      "zed"
-      "brave-browser"
-      "firefox"
-      "bitwarden"
-      "obsidian"
-      "telegram"
-      "signal"
-      "rectangle"
-      "orbstack"
-      "proton-drive"
-      "tailscale"
-      "chatgpt"
-      "element"
-      "claude"
-      "imageoptim"
-      "keka"
-      "transmission"
-      "zoom"
-    ];
+    casks =
+      browsers
+      ++ communicationApps
+      ++ developerApps
+      ++ productivityApps
+      ++ utilityApps;
 
-    brews = [
-      "kimi-cli"
-      "asdf"
-    ];
+    brews =
+      cliTools
+      ++ languageTools
+      ++ shellPlugins
+      ++ miscCli;
 
-    masApps = {
-      "uBlock Origin" = 1437421616;
-      "Dato" = 1472587095;
-    };
+    masApps = appStoreApps;
   };
 }
