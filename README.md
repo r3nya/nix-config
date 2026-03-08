@@ -59,7 +59,7 @@ so quote or escape the flake ref when calling `nix` directly.
 
 ```bash
 # Nix
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --determinate
 
 # This repo disables nix-darwin's Nix management because the installer above
 # provides Determinate Nix, which manages the daemon and nix.conf itself.
