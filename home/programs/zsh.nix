@@ -23,7 +23,7 @@
       gl = "git log --oneline --graph";
     };
 
-    initExtra = ''
+    initContent = ''
       nd() {
         if [ "$#" -eq 0 ]; then
           print -u2 "usage: nd <host>"
@@ -36,7 +36,7 @@
         fi
 
         shift
-        command nix run nix-darwin -- switch --flake "$flake" "$@"
+        command sudo -H nix run nix-darwin -- switch --flake "$flake" "$@"
       }
 
       for file in "$HOME"/.config/zsh/modules/*.zsh; do

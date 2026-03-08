@@ -61,6 +61,9 @@ so quote or escape the flake ref when calling `nix` directly.
 # Nix
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
+# This repo disables nix-darwin's Nix management because the installer above
+# provides Determinate Nix, which manages the daemon and nix.conf itself.
+
 # Restart shell
 exec $SHELL
 
@@ -74,15 +77,15 @@ cp home/local.nix.example home/local.nix
 nix flake lock
 
 # Apply config
-nix run nix-darwin -- switch --flake '.#<host>'
+sudo -H nix run nix-darwin -- switch --flake '.#<host>'
 ```
 
 Valid host targets:
 
 ```bash
-nix run nix-darwin -- switch --flake '.#pa-m2'
-nix run nix-darwin -- switch --flake '.#pp-m1'
-nix run nix-darwin -- switch --flake '.#wp-m4'
+sudo -H nix run nix-darwin -- switch --flake '.#pa-m2'
+sudo -H nix run nix-darwin -- switch --flake '.#pp-m1'
+sudo -H nix run nix-darwin -- switch --flake '.#wp-m4'
 ```
 
 If you derive the target from the machine itself, prefer `scutil --get LocalHostName` and

@@ -7,10 +7,8 @@
     ./packages.nix
   ];
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  # Determinate manages the Nix installation and daemon on this machine.
+  nix.enable = false;
 
   nixpkgs.config.allowUnfree = true;
 
@@ -20,8 +18,7 @@
   };
 
   system.stateVersion = 5;
-
-  nix.configureBuildUsers = true;
+  system.primaryUser = user;
 
   programs.zsh.enable = true;
 
