@@ -1,9 +1,14 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
+  home.file.".config/zsh/modules" = {
+    source = ./zsh/modules;
+    recursive = true;
+  };
+
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
+    enableCompletion = false;
 
     shellAliases = {
       ll = "ls -la";
@@ -21,43 +26,20 @@
     };
 
     initExtra = ''
-      source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-      source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-      bindkey '^[[A' history-substring-search-up
-      bindkey '^[[B' history-substring-search-down
-
-      setopt HIST_IGNORE_DUPS
-      setopt HIST_IGNORE_SPACE
-      setopt HIST_EXPIRE_DUPS_FIRST
-      setopt SHARE_HISTORY
+      for file in "$HOME"/.config/zsh/modules/*.zsh; do
+        [ -f "$file" ] || continue
+        source "$file"
+      done
     '';
 
     history = {
-      size = 10000;
-      save = 10000;
+      size = 50000;
+      save = 50000;
       path = "$HOME/.zsh_history";
       ignoreDups = true;
       ignoreSpace = true;
       share = true;
     };
-
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" "sudo" ];
-    };
-  };
-
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-    defaultCommand = "fd --type f --hidden --follow --exclude .git";
-    defaultOptions = [
-      "--height 40%"
-      "--layout=reverse"
-      "--border"
-    ];
   };
 
   programs.starship = {
@@ -66,8 +48,8 @@
     settings = {
       add_newline = false;
       character = {
-        success_symbol = "[➜](bold green)";
-        error_symbol = "[➜](bold red)";
+        success_symbol = "[=>](bold green)";
+        error_symbol = "[=>](bold red)";
       };
       directory = {
         truncation_length = 3;
