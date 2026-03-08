@@ -33,8 +33,9 @@
   in
   {
     darwinConfigurations = {
-      air-m2 = mkDarwin "air-m2";
-      pro-m1 = mkDarwin "pro-m1";
+      pa-m2 = mkDarwin "pa-m2";
+      pp-m1 = mkDarwin "pp-m1";
+      wp-m4 = mkDarwin "wp-m4";
     };
   };
 }
