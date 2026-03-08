@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, hostname, ... }:
 
 let
   browsers = [
@@ -49,7 +49,16 @@ let
     "font-jetbrains-mono"
   ];
 
+  hostCasks = lib.optionals (hostname == "wp-m4") [
+    "1password"
+    "gpg-suite"
+    "ngrok"
+    "session-manager-plugin"
+    "slack"
+  ];
+
   cliTools = [
+    "ack"
     "btop"
     "cloc"
     "fd"
@@ -80,9 +89,16 @@ let
     "kimi-cli"
   ];
 
+  hostBrews = lib.optionals (hostname == "wp-m4") [
+    "awscli"
+  ];
+
   appStoreApps = {
     "Dato" = 1470584107;
     "uBlock Origin Lite" = 6745342698;
+  } // lib.optionalAttrs (hostname == "wp-m4") {
+    "1Password for Safari" = 1569813296;
+    "Yubico Authenticator" = 1497506650;
   };
 in
 {
@@ -101,13 +117,15 @@ in
       ++ developerApps
       ++ productivityApps
       ++ utilityApps
-      ++ fontCasks;
+      ++ fontCasks
+      ++ hostCasks;
 
     brews =
       cliTools
       ++ languageTools
       ++ shellPlugins
-      ++ miscCli;
+      ++ miscCli
+      ++ hostBrews;
 
     masApps = appStoreApps;
   };
