@@ -1,0 +1,6 @@
+{
+  programs.git = {
+    userName = "Your Name";
+    userEmail = "you@example.com";
+  };
+}
