@@ -14,8 +14,16 @@ let
   ];
 
   developerApps = [
+    "antigravity"
+    "claude-code"
+    "codex"
+    "codex-app"
     "ghostty"
+    "httpie-desktop"
+    "jetbrains-toolbox"
+    "mitmproxy"
     "orbstack"
+    "sublime-merge"
     "zed"
   ];
 
@@ -26,13 +34,19 @@ let
     "obsidian"
     "proton-drive"
     "rectangle"
-    "tailscale"
+    "tailscale-app"
   ];
 
   utilityApps = [
     "imageoptim"
     "keka"
+    "protonvpn"
     "transmission"
+  ];
+
+  fontCasks = [
+    "font-iosevka"
+    "font-jetbrains-mono"
   ];
 
   cliTools = [
@@ -42,7 +56,6 @@ let
     "fzf"
     "gh"
     "htop"
-    "httpie"
     "jq"
     "ripgrep"
     "tmux"
@@ -68,8 +81,8 @@ let
   ];
 
   appStoreApps = {
-    "Dato" = 1472587095;
-    "uBlock Origin" = 1437421616;
+    "Dato" = 1470584107;
+    "uBlock Origin Lite" = 6745342698;
   };
 in
 {
@@ -87,7 +100,8 @@ in
       ++ communicationApps
       ++ developerApps
       ++ productivityApps
-      ++ utilityApps;
+      ++ utilityApps
+      ++ fontCasks;
 
     brews =
       cliTools
