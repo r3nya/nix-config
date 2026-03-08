@@ -1,7 +1,11 @@
 { hostname, user, ... }:
 
 {
-  networking.hostName = hostname;
+  networking = {
+    hostName = hostname;
+    localHostName = hostname;
+    computerName = hostname;
+  };
 
   system = {
     defaults = {

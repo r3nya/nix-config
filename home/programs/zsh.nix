@@ -21,11 +21,24 @@
       gc = "git commit";
       gp = "git push";
       gl = "git log --oneline --graph";
-
-      nd = "nix run nix-darwin -- switch --flake";
     };
 
     initExtra = ''
+      nd() {
+        if [ "$#" -eq 0 ]; then
+          print -u2 "usage: nd <host>"
+          return 1
+        fi
+
+        local flake="$1"
+        if [[ "$flake" != *"#"* ]]; then
+          flake=".#$flake"
+        fi
+
+        shift
+        command nix run nix-darwin -- switch --flake "$flake" "$@"
+      }
+
       for file in "$HOME"/.config/zsh/modules/*.zsh; do
         [ -f "$file" ] || continue
         source "$file"

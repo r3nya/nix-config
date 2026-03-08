@@ -36,6 +36,12 @@ One `nix-darwin switch` applies:
 - `pp-m1` - MacBook Pro M1
 - `wp-m4` - third configured macOS host
 
+macOS exposes the local network hostname as `<host>.local` over Bonjour, so `hostname`
+may print the `.local` form while the flake target remains `.#<host>`.
+
+In `zsh`, the `#` in `.#<host>` is treated as a glob operator when `EXTENDED_GLOB` is on,
+so quote or escape the flake ref when calling `nix` directly.
+
 ## Package Split
 
 - `Homebrew`: most GUI apps, CLI tools, and shell plugin dependencies
@@ -68,22 +74,25 @@ cp home/local.nix.example home/local.nix
 nix flake lock
 
 # Apply config
-nix run nix-darwin -- switch --flake .#<host>
+nix run nix-darwin -- switch --flake '.#<host>'
 ```
 
 Valid host targets:
 
 ```bash
-nix run nix-darwin -- switch --flake .#pa-m2
-nix run nix-darwin -- switch --flake .#pp-m1
-nix run nix-darwin -- switch --flake .#wp-m4
+nix run nix-darwin -- switch --flake '.#pa-m2'
+nix run nix-darwin -- switch --flake '.#pp-m1'
+nix run nix-darwin -- switch --flake '.#wp-m4'
 ```
+
+If you derive the target from the machine itself, prefer `scutil --get LocalHostName` and
+drop the `.local` suffix that `hostname` prints.
 
 ## Daily
 
 ```bash
 # Rebuild current config
-nd .#<host>
+nd <host>
 
 # Update inputs intentionally
 nix flake update
