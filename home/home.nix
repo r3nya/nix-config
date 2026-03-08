@@ -25,7 +25,15 @@
 
   programs.home-manager.enable = true;
 
-  home.file.".config/opencode/config.json".text = builtins.toJSON {
-    model = "anthropic/claude-3.5-sonnet";
+  home.file.".config/opencode/opencode.json".text = builtins.toJSON {
+    "$schema" = "https://opencode.ai/config.json";
+    theme = "system";
+    default_agent = "plan";
+    tui = {
+      scroll_speed = 3;
+      scroll_acceleration = {
+        enabled = true;
+      };
+    };
   };
 }
