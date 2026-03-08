@@ -9,6 +9,8 @@
         autohide = true;
         show-recents = false;
         launchanim = false;
+        magnification = true;
+        largesize = 64;
         orientation = "bottom";
         tilesize = 48;
         minimize-to-application = true;
@@ -51,7 +53,7 @@
 
     keyboard = {
       enableKeyMapping = true;
-      remapCapsLockToEscape = true;
+      remapCapsLockToEscape = false;
     };
   };
 
