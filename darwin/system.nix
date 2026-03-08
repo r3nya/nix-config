@@ -20,6 +20,7 @@
         ShowPathbar = true;
         ShowStatusBar = true;
         FXEnableExtensionChangeWarning = false;
+        _FXSortFoldersFirst = true;
       };
 
       NSGlobalDomain = {
