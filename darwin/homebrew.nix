@@ -66,6 +66,7 @@ let
     "gh"
     "htop"
     "jq"
+    "mole"
     "ripgrep"
     "tmux"
     "tree"
