@@ -1,4 +1,4 @@
-{ lib, hostname, ... }:
+{ lib, config, hostname, ... }:
 
 let
   browsers = [
@@ -55,6 +55,13 @@ let
     "ngrok"
     "session-manager-plugin"
     "slack"
+  ];
+
+  # macOS version check: maccy is only needed on macOS < 26 (Darwin < 35)
+  # Darwin 24 = macOS 15, so Darwin 35 would be approximately macOS 26
+  macOsMajor = lib.toInt (lib.versions.major config.system.darwinVersion);
+  versionCasks = lib.optionals (macOsMajor < 35) [
+    "maccy"
   ];
 
   cliTools = [
@@ -119,7 +126,8 @@ in
       ++ productivityApps
       ++ utilityApps
       ++ fontCasks
-      ++ hostCasks;
+      ++ hostCasks
+      ++ versionCasks;
 
     brews =
       cliTools
